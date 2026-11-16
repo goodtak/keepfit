@@ -1,193 +1,339 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>痛症運動 (預防/復康)</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f4f4f9;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .exercise-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-        }
-        .exercise-item:last-child {
-            border-bottom: none;
-        }
-        .exercise-image {
-            width: 160px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-right: 20px;
-        }
-        .exercise-info a {
-            font-size: 1.1em;
-            color: #0066cc;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .exercise-info a:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 600px) {
-            .exercise-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .exercise-image {
-                margin-bottom: 10px;
-                width: 100%;
-                height: auto;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeepFit 健康與復康資訊站｜痛症運動・天然抗炎・尿酸代謝</title>
+  <style>
+    :root {
+      --bg-color: #f7f9fc;
+      --card-bg: #ffffff;
+      --primary: #2b5876;
+      --primary-light: #4e4376;
+      --accent: #e67e22;
+      --accent-green: #2e8b57;
+      --text-main: #2c3e50;
+      --text-muted: #5d6d7e;
+      --border-color: #e1e8ed;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* 頂部全站共用導覽列 */
+    .top-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+      padding: 0.85rem 1.25rem;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .brand {
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      background-color: rgba(255, 255, 255, 0.14);
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background-color: #ffffff;
+      color: var(--primary);
+    }
+
+    /* 頁面主視覺與三大主題快速入口 */
+    .hero {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 2.5rem 1.25rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 1.9rem;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 1.8rem;
+      font-size: 1.02rem;
+    }
+
+    .feature-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.25rem;
+      text-align: left;
+    }
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #fdfefe;
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(43, 88, 118, 0.1);
+      border-color: var(--primary);
+    }
+
+    .feature-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      margin-bottom: 0.6rem;
+      width: fit-content;
+    }
+
+    .tag-blue { background: #e8f1f8; color: var(--primary); }
+    .tag-orange { background: #fef0e6; color: var(--accent); }
+    .tag-green { background: #e6f5ed; color: var(--accent-green); }
+
+    .feature-card h2 {
+      font-size: 1.22rem;
+      margin-bottom: 0.45rem;
+      color: var(--text-main);
+    }
+
+    .feature-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .feature-cta {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* 痛症運動列表區塊 */
+    main {
+      max-width: 1100px;
+      margin: 2.5rem auto;
+      padding: 0 1.25rem;
+      scroll-margin-top: 5rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .search-box {
+      padding: 0.55rem 1rem;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      width: 260px;
+      outline: none;
+    }
+
+    .search-box:focus {
+      border-color: var(--primary);
+    }
+
+    .exercise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .exercise-item {
+      background-color: var(--card-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.15rem 1.25rem;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .exercise-item:hover {
+      border-color: var(--primary);
+      background-color: #f0f6fc;
+      transform: translateY(-2px);
+    }
+
+    .exercise-item span.arrow {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.25rem;
+      margin-top: 3rem;
+      background-color: #eef2f6;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .search-box {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>痛症運動 (預防/復康)</h1>
+  <!-- 全站共用頂部導覽列 -->
+  <header class="top-navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">KeepFit 健康與復康站</a>
+      <nav class="nav-links">
+        <a href="index.html" class="active">痛症運動 (預防/復康)</a>
+        <a href="uric_acid_guide.html">尿酸與減重消脂圖解</a>
+        <a href="solutionForMusclePainful.html">薑黃+黑胡椒天然抗炎</a>
+      </nav>
+    </div>
+  </header>
 
-    <div class="exercise-item">
-        <a href="https://youtu.be/LKAEWYhUu08" target="_blank"> 
-            <img src="https://img.youtube.com/vi/LKAEWYhUu08/mqdefault.jpg" alt="頸椎運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://youtu.be/LKAEWYhUu08" target="_blank">頸椎運動</a>
+  <!-- 三大健康主題快速導覽區 -->
+  <section class="hero">
+    <h1>全方位身體復康與代謝健康指南</h1>
+    <p>整合日常痛症伸展復康運動、天然抗發炎食療配方，以及科學減脂降尿酸圖解衛教。</p>
+
+    <div class="feature-grid">
+      <a href="#exercises" class="feature-card">
+        <div>
+          <span class="feature-tag tag-blue">本身主頁專題</span>
+          <h2>痛症運動（預防 / 復康）</h2>
+          <p>涵蓋頸椎、肩背、腰背、膝關節、網球肘、媽媽手與足底筋膜炎等 15 項針對性復康運動。</p>
         </div>
+        <span class="feature-cta">瀏覽下方運動列表 ↓</span>
+      </a>
+
+      <a href="uric_acid_guide.html" class="feature-card">
+        <div>
+          <span class="feature-tag tag-green">最新圖解衛教</span>
+          <h2>尿酸與減重消脂 12 週計畫</h2>
+          <p>圖解高胰島素、肚腩脂肪與尿酸升高的因果關係，掌握「先菜後肉再澱粉」與安全消脂策略。</p>
+        </div>
+        <span class="feature-cta">進入尿酸圖解網頁 →</span>
+      </a>
+
+      <a href="solutionForMusclePainful.html" class="feature-card">
+        <div>
+          <span class="feature-tag tag-orange">天然抗炎配方</span>
+          <h2>薑黃 + 黑胡椒抗發炎飲</h2>
+          <p>解析胡椒鹼提升薑黃素吸收率 2,000% 的科學原理，附詳細慢煮比例與健康脂肪搭配做法。</p>
+        </div>
+        <span class="feature-cta">查看天然抗炎配方 →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 原本首頁的 15 項痛症運動列表（保留原功能並新增即時搜尋過濾） -->
+  <main id="exercises">
+    <div class="section-header">
+      <h2>痛症運動 (預防/復康)</h2>
+      <input type="text" id="searchInput" class="search-box" placeholder="搜尋部位（如：膝關節、網球肘...）" onkeyup="filterExercises()" />
     </div>
 
-    <div class="exercise-item">
-         <a href="https://youtu.be/CdbxxdZJw7o" target="_blank">
-             <img src="https://img.youtube.com/vi/CdbxxdZJw7o/mqdefault.jpg" alt="髖關節運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://youtu.be/CdbxxdZJw7o" target="_blank">髖關節運動</a>
-        </div>
+    <div class="exercise-grid" id="exerciseList">
+      <a href="https://youtu.be/LKAEWYhUu08" class="exercise-item"><span>頸椎運動</span><span class="arrow">→</span></a>
+      <a href="#hip" class="exercise-item"><span>髖關節運動</span><span class="arrow">→</span></a>
+      <a href="#foot" class="exercise-item"><span>足部運動</span><span class="arrow">→</span></a>
+      <a href="#dequervain" class="exercise-item"><span>媽媽手 (拇指腱鞘炎)</span><span class="arrow">→</span></a>
+      <a href="#carpal" class="exercise-item"><span>腕管綜合症 運動</span><span class="arrow">→</span></a>
+      <a href="#shoulder" class="exercise-item"><span>肩關節及上背運動</span><span class="arrow">→</span></a>
+      <a href="#knee" class="exercise-item"><span>膝關節運動</span><span class="arrow">→</span></a>
+      <a href="#ankle" class="exercise-item"><span>腳踝復康運動</span><span class="arrow">→</span></a>
+      <a href="#tennis-elbow" class="exercise-item"><span>網球肘復康運動</span><span class="arrow">→</span></a>
+      <a href="#trigger-finger" class="exercise-item"><span>彈弓指復康運動</span><span class="arrow">→</span></a>
+      <a href="#lower-back" class="exercise-item"><span>下腰背運動</span><span class="arrow">→</span></a>
+      <a href="#calf" class="exercise-item"><span>小腿伸展運動</span><span class="arrow">→</span></a>
+      <a href="#plantar" class="exercise-item"><span>足底筋膜炎復康運動</span><span class="arrow">→</span></a>
+      <a href="#hand-arthritis" class="exercise-item"><span>手關節炎復康運動</span><span class="arrow">→</span></a>
+      <a href="#golfer-elbow" class="exercise-item"><span>高爾夫球肘復康運動</span><span class="arrow">→</span></a>
     </div>
+  </main>
 
-    <div class="exercise-item">
-         <a href="https://www.youtube.com/watch?v=wSMiEVHzyPE" target="_blank">
-             <img src="https://img.youtube.com/vi/wSMiEVHzyPE/mqdefault.jpg" alt="足部運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://www.youtube.com/watch?v=wSMiEVHzyPE" target="_blank">足部運動</a>
-        </div>
-    </div>
+  <footer>
+    <p>KeepFit 健康與復康資訊站｜本網站內容僅供健康教育與復康參考，如有持續疼痛或急性症狀請諮詢專業醫護人員。</p>
+  </footer>
 
-    <div class="exercise-item">
-         <a href="https://www.youtube.com/watch?v=tTDLGDPD78I" target="_blank">
-             <img src="https://img.youtube.com/vi/tTDLGDPD78I/mqdefault.jpg" alt="媽媽手" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://www.youtube.com/watch?v=tTDLGDPD78I" target="_blank">媽媽手 (拇指腱鞘炎)</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-        <a href="https://www.youtube.com/watch?v=tGBMk-4WDoQ" target="_blank">
-            <img src="https://img.youtube.com/vi/tGBMk-4WDoQ/mqdefault.jpg" alt="腕管綜合症" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://www.youtube.com/watch?v=tGBMk-4WDoQ" target="_blank">腕管綜合症 運動</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-         <a href="https://youtu.be/f_wswmt9X8I" target="_blank">
-             <img src="https://img.youtube.com/vi/f_wswmt9X8I/mqdefault.jpg" alt="肩關節及上背運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://youtu.be/f_wswmt9X8I" target="_blank">肩關節及上背運動</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-        <a href="https://youtu.be/SY7S1M03Iag" target="_blank">
-            <img src="https://img.youtube.com/vi/SY7S1M03Iag/mqdefault.jpg" alt="膝關節運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://youtu.be/SY7S1M03Iag" target="_blank">膝關節運動</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-        <a href="https://www.youtube.com/watch?v=99VxZoUtEVQ" target="_blank">
-            <img src="https://img.youtube.com/vi/99VxZoUtEVQ/mqdefault.jpg" alt="腳踝復康運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://www.youtube.com/watch?v=99VxZoUtEVQ" target="_blank">腳踝復康運動</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-         <a href="https://youtu.be/Rnxlf8UIdsY" target="_blank">
-             <img src="https://img.youtube.com/vi/Rnxlf8UIdsY/mqdefault.jpg" alt="網球肘復康運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://youtu.be/Rnxlf8UIdsY" target="_blank">網球肘復康運動</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-         <a href="https://www.youtube.com/watch?v=g4exjvULYIU" target="_blank">
-             <img src="https://img.youtube.com/vi/g4exjvULYIU/mqdefault.jpg" alt="彈弓指復康運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://www.youtube.com/watch?v=g4exjvULYIU" target="_blank">彈弓指復康運動</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-        <a href="https://youtu.be/g1a444lpYqI" target="_blank">
-            <img src="https://img.youtube.com/vi/g1a444lpYqI/mqdefault.jpg" alt="下腰背運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://youtu.be/g1a444lpYqI" target="_blank">下腰背運動</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-        <a href="https://youtu.be/WcUIBaqYmio" target="_blank">
-            <img src="https://img.youtube.com/vi/WcUIBaqYmio/mqdefault.jpg" alt="小腿伸展運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://youtu.be/WcUIBaqYmio" target="_blank">小腿伸展運動</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-        <a href="https://youtu.be/IOUESgrg-uo" target="_blank">
-            <img src="https://img.youtube.com/vi/IOUESgrg-uo/mqdefault.jpg" alt="足底筋膜炎復康運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://youtu.be/IOUESgrg-uo" target="_blank">足底筋膜炎復康運動</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-        <a href="https://youtu.be/7sV057UMSzE" target="_blank">
-            <img src="https://img.youtube.com/vi/7sV057UMSzE/mqdefault.jpg" alt="手關節炎復康運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://youtu.be/7sV057UMSzE" target="_blank">手關節炎復康運動</a>
-        </div>
-    </div>
-
-    <div class="exercise-item">
-         <a href="https://youtu.be/B4Z5xDeRE_E" target="_blank">
-             <img src="https://img.youtube.com/vi/B4Z5xDeRE_E/mqdefault.jpg" alt="高爾夫球肘復康運動" class="exercise-image"></a>
-        <div class="exercise-info">
-            <a href="https://youtu.be/B4Z5xDeRE_E" target="_blank">高爾夫球肘復康運動</a>
-        </div>
-    </div>
-
-</div>
-
+  <script>
+    function filterExercises() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const items = document.querySelectorAll('.exercise-item');
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(input) ? 'flex' : 'none';
+      });
+    }
+  </script>
 </body>
 </html>

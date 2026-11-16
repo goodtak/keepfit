@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>尿酸與代謝健康全解析｜圖解衛教懶人包</title>
+  <style>
+    :root {
+      --bg-color: #fbf7f0;
+      --card-bg: #ffffff;
+      --primary-brown: #5c3d2e;
+      --accent-orange: #d97736;
+      --accent-green: #4e8c66;
+      --accent-red: #c84b31;
+      --text-main: #3b2f2f;
+      --text-muted: #6e5d56;
+      --border-soft: #e6d8c5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    /* 頂部橫幅 */
+    header {
+      background: linear-gradient(135deg, #f3e5d0 0%, #ead3b3 100%);
+      border-bottom: 3px solid var(--border-soft);
+      padding: 2.5rem 1.25rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: var(--primary-brown);
+      margin-bottom: 0.6rem;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+ text-align: left;
+
+    }
+
+    /* 黏性導覽列 */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--primary-brown);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 0.4rem 0.95rem;
+      border-radius: 999px;
+      background-color: #f6ede0;
+      transition: all 0.2s ease;
+    }
+
+    nav a:hover {
+      background-color: var(--accent-orange);
+      color: #ffffff;
+    }
+
+    /* 主內容區塊 */
+    main {
+      max-width: 1040px;
+      margin: 2rem auto;
+      padding: 0 1.25rem;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 4.5rem;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.45rem;
+      color: var(--primary-brown);
+      border-left: 6px solid var(--accent-orange);
+      padding-left: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* 圖卡設計 */
+    .card {
+      background-color: var(--card-bg);
+      border: 2px solid var(--border-soft);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(92, 61, 46, 0.06);
+      margin-bottom: 2rem;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card-header {
+      padding: 1.25rem 1.5rem 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background-color: #faebd7;
+      color: var(--accent-orange);
+    }
+
+    .badge.green {
+      background-color: #e3f2e8;
+      color: var(--accent-green);
+    }
+
+    .badge.red {
+      background-color: #fae5e0;
+      color: var(--accent-red);
+    }
+
+    .card-header h3 {
+      font-size: 1.25rem;
+      color: var(--primary-brown);
+      width: 100%;
+      margin-top: 0.35rem;
+    }
+
+    .card-img-wrap {
+      padding: 0.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      max-width: 880px;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid #efe4d6;
+      cursor: zoom-in;
+    }
+
+    .zoom-hint {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    .card-body {
+      padding: 1rem 1.5rem 1.5rem;
+      color: var(--text-main);
+      font-size: 0.98rem;
+    }
+
+    .card-body ul {
+      padding-left: 1.35rem;
+      margin-top: 0.4rem;
+    }
+
+    .card-body li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* 圖片放大燈箱 (Lightbox) */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background-color: rgba(30, 22, 18, 0.88);
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      cursor: zoom-out;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 96%;
+      max-height: 92vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 頁尾免責聲明 */
+    footer {
+      background-color: #f0e4d3;
+      border-top: 2px solid var(--border-soft);
+      text-align: center;
+      padding: 2rem 1.25rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 1.55rem;
+      }
+      .card-header, .card-img-wrap, .card-body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div style="background:#2b5876; padding:10px 16px; text-align:center;">
+  <a href="index.html" style="color:#fff; text-decoration:none; font-weight:bold; margin:0 12px;">← 返回痛症運動首頁</a>
+ <!-- <a href="uric-acid.html" style="color:#ffd166; text-decoration:none; font-weight:bold; margin:0 12px;">尿酸與減重圖解</a>
+  <a href="solutionForMusclePainful.html" style="color:#ffd166; text-decoration:none; font-weight:bold; margin:0 12px;">薑黃+黑胡椒抗炎</a>
+  -->
+</div>
+
+  <header>
+    <h1>尿酸與代謝健康全解析</h1>
+    <p>從肥胖、高胰島素阻抗的真正成因出發，用 10 張圖解帶你掌握安全減脂、預防痛風與腎結石的科學方法。</p>
+  </header>
+
+  <nav>
+    <a href="#part1">一、肥胖與尿酸升高的真相</a>
+    <a href="#part2">二、為什麼不能極端節食？</a>
+    <a href="#part3">三、安全減重消脂實戰計畫</a>
+    <a href="#part4">四、正確認識尿酸與醫療配合</a>
+  </nav>
+
+  <main>
+    <!-- 第一部分：成因 -->
+    <section id="part1">
+      <h2 class="section-title">一、肥胖、高胰島素與尿酸升高的真相</h2>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="badge red">路徑 1：腎臟把尿酸撈回來</span>
+          <h3>高胰島素如何引發血液尿酸飆升、高血壓與痛風？</h3>
+        </div>
+        <div class="card-img-wrap">
+          <img src="1_image_health.jpg" alt="高胰島素把尿酸撈回來" onclick="openLightbox(this.src)" />
+          <div class="zoom-hint">點擊圖片可放大檢視細節</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>胰島素阻抗與高胰島素：</strong>肥胖與體脂過高會引發胰島素阻抗，迫使胰臟分泌大量胰島素。</li>
+            <li><strong>腎臟回收幫浦開啟：</strong>過高的胰島素會刺激腎小管把原本要排出的尿酸與鈉離子「撈回」血液，進而誘發<strong>痛風</strong>與<strong>高血壓</strong>。</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="badge red">路徑 2：尿液酸化危機</span>
+          <h3>高胰島素如何讓尿液變酸，進而長出「尿酸結石」？</h3>
+        </div>
+        <div class="card-img-wrap">
+          <img src="2_image_health.jpg" alt="高胰島素導致尿液變酸與尿酸結石" onclick="openLightbox(this.src)" />
+          <div class="zoom-hint">點擊圖片可放大檢視細節</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>中和酸能力下降：</strong>胰島素阻抗會讓腎臟製造「氨」的能力受阻，導致尿液缺乏鹼性緩衝而異常偏酸（pH &lt; 5.5）。</li>
+            <li><strong>酸性環境逼出結晶：</strong>尿酸在酸性尿液中溶解度大幅下降，極易在腎臟集尿系統中沉積長成<strong>尿酸結石</strong>。</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="badge">上游源頭：肚腩內臟脂肪</span>
+          <h3>肚腩脂肪是尿酸製造機？減肥消脂才是消除痛風皇道！</h3>
+        </div>
+        <div class="card-img-wrap">
+          <img src="3_image_health.jpg" alt="肚腩脂肪製造次黃嘌呤與尿酸" onclick="openLightbox(this.src)" />
+          <div class="zoom-hint">點擊圖片可放大檢視細節</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>缺氧發炎的脂肪細胞：</strong>肚腩堆積的內臟脂肪容易陷入缺氧與慢性發炎，大量分泌「次黃嘌呤」進入血液。</li>
+            <li><strong>直送肝臟製造尿酸：</strong>這些次黃嘌呤會成為肝臟與血管內皮製造尿酸的原料，因此<strong>減肥消脂</strong>能從源頭減少尿酸原料。</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="badge">關鍵比例：2/3 vs 1/3</span>
+          <h3>單靠飲食戒口很難降尿酸，重點在於讓「排走尿酸功能變好」</h3>
+        </div>
+        <div class="card-img-wrap">
+          <img src="4_image_health.jpg" alt="尿酸的兩大來源比例" onclick="openLightbox(this.src)" />
+          <div class="zoom-hint">點擊圖片可放大檢視細節</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>內源性佔 2/3（最大宗）：</strong>來自體內每天細胞新陳代謝與核酸（DNA、RNA）分解，高度由基因與代謝狀態決定。</li>
+            <li><strong>飲食來源僅佔 1/3：</strong>單靠限制高嘌呤食物效果有限，透過<strong>減重消脂</strong>改善腎臟排泄功能才是關鍵。</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- 第二部分：減重迷思 -->
+    <section id="part2">
+      <h2 class="section-title">二、減重迷思：為什麼不能極端節食？</h2>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="badge red">危險地雷</span>
+          <h3>為什麼極端節食反而會誘發急性痛風？</h3>
+        </div>
+        <div class="card-img-wrap">
+          <img src="5_image_health.jpg" alt="為什麼極端節食會誘發痛風" onclick="openLightbox(this.src)" />
+          <div class="zoom-hint">點擊圖片可放大檢視細節</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>酮體搶占排泄通道：</strong>快速燃脂產生大量酮體，會在腎臟與尿酸競爭排泄出口，迫使尿酸被回收。</li>
+            <li><strong>拆解肌肉與脫水濃縮：</strong>飢餓會分解自身肌肉釋放大量內源嘌呤，加上糖原消耗導致脫水、血尿酸劇烈波動，極易引爆急性痛風。</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="badge green">正確節奏</span>
+          <h3>溫和減重（每週 0.5～1 公斤）如何安全降尿酸？</h3>
+        </div>
+        <div class="card-img-wrap">
+          <img src="6_image_health.jpg" alt="溫和減重如何安全降尿酸" onclick="openLightbox(this.src)" />
+          <div class="zoom-hint">點擊圖片可放大檢視細節</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>不產過量酮體、不掉肌肉：</strong>保留 1/3 優質澱粉與 1/3 蛋白質，維持適度熱量赤字，讓脂肪穩步減少而不干擾腎臟排酸。</li>
+            <li><strong>充足飲水稀釋沖刷：</strong>每日飲水 2000 ml 以上，讓血尿酸平穩下降、安全遠離痛風發作。</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+   <!-- 第三部分：實戰計畫 -->
+    <section id="part3">
+      <h2 class="section-title">三、安全減重消脂 12 週實戰計畫</h2>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="badge green">日常行動指南</span>
+          <h3>減重消脂 12 週計畫：飲食順序、控糖避雷、餐後散步與醫師溝通</h3>
+        </div>
+        <div class="card-img-wrap">
+          <img src="7_image_health.jpg" alt="減重消脂12週計畫" onclick="openLightbox(this.src)" />
+          <div class="zoom-hint">點擊圖片可放大檢視細節</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>1. 黃金餐盤與進食順序：</strong>每餐維持 1/3 蔬菜、1/3 肉類蛋白質、1/3 優質澱粉（番薯、芋頭、南瓜、粗米），嚴格遵守「先吃蔬菜 ➔ 再吃肉 ➔ 最後吃澱粉」，早午晚餐堅持如是，幫助穩定血糖與胰島素。</li>
+            <li><strong>2. 飯後即散步：</strong>餐後立即輕鬆散步 15 至 30 分鐘，幫助肌肉消耗血糖、穩定胰島素。</li>
+
+ <li><strong> 3. 溫和調整餐次：</strong>早餐可視個人適應情況不食（3 餐變 2 餐），拉長空腹時間協助身體溫和燃燒內臟脂肪，但午晚餐仍需吃足營養。</li>
+
+<li><strong> 減少果糖、甜食與味精攝入（關鍵避雷）：</strong>避免飲用含糖飲料、果汁及高果糖玉米糖漿製成的食品，並減少味精攝取；因為<strong>果糖在肝臟代謝時會加速尿酸生成</strong>，同時加劇胰島素阻抗。</li>
+            <li><strong> 與醫療團隊同步：</strong>開始執行前務必<strong>通知你的醫生你的計畫</strong>，以便醫生留意你的身體情況並適時調整用藥。</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- 第四部分：正確認識尿酸與醫療配合 -->
+    <section id="part4">
+      <h2 class="section-title">四、正確認識尿酸與現代醫療配合</h2>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="badge">平衡觀點</span>
+          <h3>尿酸有它的重要性，並不是單純的「壞份子」</h3>
+        </div>
+        <div class="card-img-wrap">
+          <img src="8_image_health.jpg" alt="尿酸的重要性" onclick="openLightbox(this.src)" />
+          <div class="zoom-hint">點擊圖片可放大檢視細節</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>強效抗氧化劑與大腦保護：</strong>尿酸能讓出電子中和自由基，也是中樞神經重要的抗氧化來源，數值過低反而與神經退化風險相關。</li>
+            <li><strong>遠古生存幫手與合理平衡：</strong>自遠古時代起，尿酸協助推動脂肪合成與維持血壓；現代人並不是要把尿酸降到零，而是維持在健康的安全範圍內。</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="badge green">定期監測</span>
+          <h3>與醫生緊密合作，定期監控尿酸維持健康水平</h3>
+        </div>
+        <div class="card-img-wrap">
+          <img src="9_image_health.jpg" alt="與醫生緊密合作監控尿酸" onclick="openLightbox(this.src)" />
+          <div class="zoom-hint">點擊圖片可放大檢視細節</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>個人化目標設定：</strong>透過定期抽血檢查與醫師評估，根據是否有痛風石、腎結石或共病症，設定最適合自己的血尿酸控制目標。</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="badge">藥物機轉科普</span>
+          <h3>降尿酸藥「別嘌醇（Allopurinol）」是如何發揮作用的？</h3>
+        </div>
+        <div class="card-img-wrap">
+          <img src="10_image_health.jpg" alt="別嘌醇的作用機轉" onclick="openLightbox(this.src)" />
+          <div class="zoom-hint">點擊圖片可放大檢視細節</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>抑制生成與回收再利用：</strong>阻斷「黃嘌呤氧化酶」減少尿酸形成，並讓多出來的次黃嘌呤被身體回收合成新核苷酸，不用從頭合成嘌呤，變相減少尿酸來源。</li>
+            <li><strong>快速排出不沉積：</strong>雖然血液中次黃嘌呤與黃嘌呤濃度會上升，但一般情況下，這兩者從腎臟排出的速度比尿酸快 10 倍以上，不易沉積在體內。</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>健康衛教聲明：</strong>本網頁圖文內容僅供醫學科普與健康生活參考，不能替代專業醫師之診斷與處方。調整飲食、執行減重計畫或使用降尿酸藥物前，請務必諮詢您的主治醫師。</p>
+  </footer>
+
+  <!-- 點擊圖片放大燈箱 -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="放大檢視" />
+  </div>
+
+  <script>
+    function openLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
+
