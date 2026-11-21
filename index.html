@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KeepFit 健康與復康資訊站｜痛症運動・天然抗炎・尿酸代謝</title>
+  <title>KeepFit 健康與復康資訊站｜痛症運動・尿酸代謝・天然抗炎</title>
   <style>
     :root {
-      --bg-color: #f7f9fc;
+      --bg-color: #f4f7fa;
       --card-bg: #ffffff;
       --primary: #2b5876;
-      --primary-light: #4e4376;
-      --accent: #e67e22;
+      --primary-dark: #1e3f56;
       --accent-green: #2e8b57;
+      --accent-orange: #d97736;
       --text-main: #2c3e50;
       --text-muted: #5d6d7e;
       --border-color: #e1e8ed;
@@ -27,313 +27,202 @@
       font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
       background-color: var(--bg-color);
       color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Header */
+    header {
+      background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 3.5rem 1.25rem 3rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      opacity: 0.92;
       line-height: 1.6;
     }
 
-    /* 頂部全站共用導覽列 */
-    .top-navbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
-      padding: 0.85rem 1.25rem;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+    /* Main 3-Card Hub */
+    main {
+      flex: 1;
+      max-width: 1120px;
+      width: 100%;
+      margin: -1.8rem auto 3rem;
+      padding: 0 1.25rem;
     }
 
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .brand {
-      color: #ffffff;
-      font-size: 1.25rem;
-      font-weight: 700;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-
-    .nav-links a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 0.45rem 1rem;
-      border-radius: 999px;
-      background-color: rgba(255, 255, 255, 0.14);
-      transition: all 0.2s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      background-color: #ffffff;
-      color: var(--primary);
-    }
-
-    /* 頁面主視覺與三大主題快速入口 */
-    .hero {
-      background-color: #ffffff;
-      border-bottom: 1px solid var(--border-color);
-      padding: 2.5rem 1.25rem;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 1.9rem;
-      color: var(--primary);
-      margin-bottom: 0.6rem;
-    }
-
-    .hero p {
-      color: var(--text-muted);
-      max-width: 680px;
-      margin: 0 auto 1.8rem;
-      font-size: 1.02rem;
-    }
-
-    .feature-grid {
-      max-width: 1100px;
-      margin: 0 auto;
+    .hub-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 1.25rem;
-      text-align: left;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.75rem;
     }
 
-    .feature-card {
+    .hub-card {
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      padding: 2rem 1.75rem;
+      text-decoration: none;
+      color: inherit;
+      border: 2px solid var(--border-color);
+      box-shadow: 0 10px 28px rgba(43, 88, 118, 0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: #fdfefe;
-      border: 2px solid var(--border-color);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .hub-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(43, 88, 118, 0.16);
+    }
+
+    .hub-card.blue:hover { border-color: var(--primary); }
+    .hub-card.green:hover { border-color: var(--accent-green); }
+    .hub-card.orange:hover { border-color: var(--accent-orange); }
+
+    .icon-circle {
+      width: 60px;
+      height: 60px;
       border-radius: 16px;
-      padding: 1.4rem;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.85rem;
+      margin-bottom: 1.25rem;
     }
 
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 24px rgba(43, 88, 118, 0.1);
-      border-color: var(--primary);
-    }
+    .blue .icon-circle { background-color: #e8f1f8; }
+    .green .icon-circle { background-color: #e6f5ed; }
+    .orange .icon-circle { background-color: #fef0e6; }
 
-    .feature-tag {
+    .tag {
       display: inline-block;
       font-size: 0.8rem;
       font-weight: 700;
-      padding: 0.2rem 0.7rem;
+      padding: 0.25rem 0.75rem;
       border-radius: 999px;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.75rem;
       width: fit-content;
     }
 
-    .tag-blue { background: #e8f1f8; color: var(--primary); }
-    .tag-orange { background: #fef0e6; color: var(--accent); }
-    .tag-green { background: #e6f5ed; color: var(--accent-green); }
+    .blue .tag { background: #e8f1f8; color: var(--primary); }
+    .green .tag { background: #e6f5ed; color: var(--accent-green); }
+    .orange .tag { background: #fef0e6; color: var(--accent-orange); }
 
-    .feature-card h2 {
-      font-size: 1.22rem;
-      margin-bottom: 0.45rem;
+    .hub-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
       color: var(--text-main);
     }
 
-    .feature-card p {
-      font-size: 0.92rem;
+    .hub-card p {
+      font-size: 0.96rem;
       color: var(--text-muted);
-      margin-bottom: 1rem;
+      line-height: 1.65;
+      margin-bottom: 1.75rem;
     }
 
-    .feature-cta {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    /* 痛症運動列表區塊 */
-    main {
-      max-width: 1100px;
-      margin: 2.5rem auto;
-      padding: 0 1.25rem;
-      scroll-margin-top: 5rem;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
+    .btn-enter {
+      display: inline-flex;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 2px solid var(--border-color);
-    }
-
-    .section-header h2 {
-      font-size: 1.5rem;
-      color: var(--primary);
-    }
-
-    .search-box {
-      padding: 0.55rem 1rem;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      width: 260px;
-      outline: none;
-    }
-
-    .search-box:focus {
-      border-color: var(--primary);
-    }
-
-    .exercise-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1rem;
-    }
-
-    .exercise-item {
-      background-color: var(--card-bg);
-      border: 1.5px solid var(--border-color);
+      justify-content: center;
+      width: 100%;
+      padding: 0.8rem 1.25rem;
       border-radius: 12px;
-      padding: 1.15rem 1.25rem;
-      text-decoration: none;
-      color: var(--text-main);
-      font-weight: 600;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.2s ease;
-    }
-
-    .exercise-item:hover {
-      border-color: var(--primary);
-      background-color: #f0f6fc;
-      transform: translateY(-2px);
-    }
-
-    .exercise-item span.arrow {
-      color: var(--primary);
       font-weight: 700;
+      font-size: 0.98rem;
+      color: #ffffff;
+      transition: opacity 0.2s ease;
     }
 
+    .blue .btn-enter { background-color: var(--primary); }
+    .green .btn-enter { background-color: var(--accent-green); }
+    .orange .btn-enter { background-color: var(--accent-orange); }
+
+    .hub-card:hover .btn-enter {
+      opacity: 0.92;
+    }
+
+    /* Footer */
     footer {
       text-align: center;
-      padding: 2rem 1.25rem;
-      margin-top: 3rem;
-      background-color: #eef2f6;
+      padding: 1.75rem 1.25rem;
+      background-color: #e9eff5;
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
     }
 
-    @media (max-width: 600px) {
-      .search-box {
-        width: 100%;
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 1.65rem;
+      }
+      main {
+        margin-top: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- 全站共用頂部導覽列 -->
-  <header class="top-navbar">
-    <div class="nav-container">
-      <a href="index.html" class="brand">KeepFit 健康與復康站</a>
-      <nav class="nav-links">
-        <a href="index.html" class="active">痛症運動 (預防/復康)</a>
-        <a href="uric_acid_guide.html">尿酸與減重消脂圖解</a>
-        <a href="solutionForMusclePainful.html">薑黃+黑胡椒天然抗炎</a>
-      </nav>
-    </div>
+  <header>
+    <h1>KeepFit 健康與復康資訊站</h1>
+    <p>精選三大居家健康與復康專題：伸展運動教學、科學降尿酸與減脂圖解、天然抗發炎食療配方。</p>
   </header>
 
-  <!-- 三大健康主題快速導覽區 -->
-  <section class="hero">
-    <h1>全方位身體復康與代謝健康指南</h1>
-    <p>整合日常痛症伸展復康運動、天然抗發炎食療配方，以及科學減脂降尿酸圖解衛教。</p>
-
-    <div class="feature-grid">
-      <a href="#exercises" class="feature-card">
+  <main>
+    <div class="hub-grid">
+      <!-- Link 1: Stretch & Rehab Exercises Page -->
+      <a href="stretch-exercises.html" class="hub-card blue">
         <div>
-          <span class="feature-tag tag-blue">本身主頁專題</span>
-          <h2>痛症運動（預防 / 復康）</h2>
-          <p>涵蓋頸椎、肩背、腰背、膝關節、網球肘、媽媽手與足底筋膜炎等 15 項針對性復康運動。</p>
+          <div class="icon-circle">🧘‍♂️</div>
+          <span class="tag">預防 / 復康運動</span>
+          <h2>痛症伸展與復康運動</h2>
+          <p>收錄 15 套針對頸椎、肩背、腰背、膝關節、媽媽手、網球肘與足底筋膜炎的專業居家伸展運動影片。</p>
         </div>
-        <span class="feature-cta">瀏覽下方運動列表 ↓</span>
+        <span class="btn-enter">進入運動教學頁面 →</span>
       </a>
 
-      <a href="uric_acid_guide.html" class="feature-card">
+      <!-- Link 2: Uric Acid & Weight Loss Page -->
+      <a href="uric_acid_guide.html" class="hub-card green">
         <div>
-          <span class="feature-tag tag-green">最新圖解衛教</span>
+          <div class="icon-circle">📊</div>
+          <span class="tag">代謝與減脂衛教</span>
           <h2>尿酸與減重消脂 12 週計畫</h2>
-          <p>圖解高胰島素、肚腩脂肪與尿酸升高的因果關係，掌握「先菜後肉再澱粉」與安全消脂策略。</p>
+          <p>透過 10 張圖解掌握高胰島素、肚腩脂肪與尿酸升高的因果關係，學習「先菜後肉再澱粉」與安全消脂策略。</p>
         </div>
-        <span class="feature-cta">進入尿酸圖解網頁 →</span>
+        <span class="btn-enter">進入尿酸圖解頁面 →</span>
       </a>
 
-      <a href="solutionForMusclePainful.html" class="feature-card">
+      <!-- Link 3: Solution for Muscle Painful Page -->
+      <a href="solutionForMusclePainful.html" class="hub-card orange">
         <div>
-          <span class="feature-tag tag-orange">天然抗炎配方</span>
-          <h2>薑黃 + 黑胡椒抗發炎飲</h2>
-          <p>解析胡椒鹼提升薑黃素吸收率 2,000% 的科學原理，附詳細慢煮比例與健康脂肪搭配做法。</p>
+          <div class="icon-circle">🫚</div>
+          <span class="tag">天然抗發炎食療</span>
+          <h2>薑黃 + 黑胡椒抗發炎配方</h2>
+          <p>了解黑胡椒如何提升薑黃素吸收率達 2,000%，附詳細慢煮比例、健康脂肪搭配做法與飲用注意事項。</p>
         </div>
-        <span class="feature-cta">查看天然抗炎配方 →</span>
+        <span class="btn-enter">進入痛症舒緩配方頁面 →</span>
       </a>
-    </div>
-  </section>
-
-  <!-- 原本首頁的 15 項痛症運動列表（保留原功能並新增即時搜尋過濾） -->
-  <main id="exercises">
-    <div class="section-header">
-      <h2>痛症運動 (預防/復康)</h2>
-      <input type="text" id="searchInput" class="search-box" placeholder="搜尋部位（如：膝關節、網球肘...）" onkeyup="filterExercises()" />
-    </div>
-
-    <div class="exercise-grid" id="exerciseList">
-      <a href="https://youtu.be/LKAEWYhUu08" class="exercise-item"><span>頸椎運動</span><span class="arrow">→</span></a>
-      <a href="https://youtu.be/CdbxxdZJw7o" class="exercise-item"><span>髖關節運動</span><span class="arrow">→</span></a>
-      <a href="https://www.youtube.com/watch?v=wSMiEVHzyPE" class="exercise-item"><span>足部運動</span><span class="arrow">→</span></a>
-      <a href="https://www.youtube.com/watch?v=tTDLGDPD78I" class="exercise-item"><span>媽媽手 (拇指腱鞘炎)</span><span class="arrow">→</span></a>
-      <a href="https://www.youtube.com/watch?v=tGBMk-4WDoQ"  class="exercise-item"><span>腕管綜合症 運動</span><span class="arrow">→</span></a>
-      <a href="https://youtu.be/f_wswmt9X8I" class="exercise-item"><span>肩關節及上背運動</span><span class="arrow">→</span></a>
-      <a href="https://youtu.be/SY7S1M03Iag" class="exercise-item"><span>膝關節運動</span><span class="arrow">→</span></a>
-      <a href="https://www.youtube.com/watch?v=99VxZoUtEVQ" class="exercise-item"><span>腳踝復康運動</span><span class="arrow">→</span></a>
-      <a href="https://youtu.be/Rnxlf8UIdsY" class="exercise-item"><span>網球肘復康運動</span><span class="arrow">→</span></a>
-      <a href="https://www.youtube.com/watch?v=g4exjvULYIU" class="exercise-item"><span>彈弓指復康運動</span><span class="arrow">→</span></a>
-      <a href="#lower-back" class="exercise-item"><span>下腰背運動</span><span class="arrow">→</span></a>
-      <a href="#calf" class="exercise-item"><span>小腿伸展運動</span><span class="arrow">→</span></a>
-      <a href="#plantar" class="exercise-item"><span>足底筋膜炎復康運動</span><span class="arrow">→</span></a>
-      <a href="#hand-arthritis" class="exercise-item"><span>手關節炎復康運動</span><span class="arrow">→</span></a>
-      <a href="#golfer-elbow" class="exercise-item"><span>高爾夫球肘復康運動</span><span class="arrow">→</span></a>
     </div>
   </main>
 
   <footer>
-    <p>KeepFit 健康與復康資訊站｜本網站內容僅供健康教育與復康參考，如有持續疼痛或急性症狀請諮詢專業醫護人員。</p>
+    <p>KeepFit 健康與復康資訊站｜本網站內容僅供健康教育與日常保健參考，不能替代專業醫師診斷。如有持續疼痛或急性症狀，請諮詢醫護人員。</p>
   </footer>
 
-  <script>
-    function filterExercises() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      const items = document.querySelectorAll('.exercise-item');
-      items.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        item.style.display = text.includes(input) ? 'flex' : 'none';
-      });
-    }
-  </script>
 </body>
 </html>
